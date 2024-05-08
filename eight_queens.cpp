@@ -12,10 +12,20 @@
 #include <string>
 
 bool check_if_threathens_other_queen(int x, int y, bool board[8][8]) {
-    for (int i = x; i < 8; i++) {
-        for (int j = y; j < 8; j++) {
-            if (board[i][j]) return true;
-        }
+    for (int i = x + 1; i < 8; i++) {
+        if (board[i][y]) return true;
+    }
+
+    for (int j = y + 1; j < 8; j++) {
+        if (board[x][j]) return true;
+    }
+    
+    for (int i = x + 1, j = y + 1; i < 8 && j < 8; i++, j++) {
+        if (board[i][j]) return true;
+    }
+
+    for (int i = x + 1, j = y - 1; i < 8 && j >= 0; i++, j--) {
+        if (board[i][j]) return true;
     }
 
     return false;
@@ -60,9 +70,9 @@ int is_valid_eight_queens(std::string file_name) {
     for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 8; j++) {
             if (board[i][j] && check_if_threathens_other_queen(i, j, board))
-                return 1;
+                return 0;
         }
     }
 
-    return 0;
+    return 1;
 }

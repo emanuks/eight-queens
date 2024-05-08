@@ -13,8 +13,10 @@
 #include "./eight_queens.hpp"
 
 TEST_CASE("Eight Queens - Valid", "[eight_queens]") {
-    REQUIRE(is_valid_eight_queens("valid_board_eight_queens_valid_solution.txt") == 1);
     REQUIRE(is_valid_eight_queens("valid_board_eight_queens_invalid_solution.txt") == 0);
+    REQUIRE(is_valid_eight_queens("valid_board_eight_queens_valid_solution.txt") == 1);
+    REQUIRE(is_valid_eight_queens("valid_board_eight_queens_invalid_solution_main_diagonal.txt") == 0);
+    REQUIRE(is_valid_eight_queens("valid_board_eight_queens_invalid_solution_second_diagonal.txt") == 0);
 }
 
 TEST_CASE("Eight Queens - Invalid", "[eight_queens]") {
