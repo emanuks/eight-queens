@@ -11,6 +11,8 @@
 #include <fstream>
 #include <string>
 
+#include "./eight_queens.hpp"
+
 bool check_if_threathens_other_queen(int x, int y, bool board[8][8]) {
     for (int i = x + 1; i < 8; i++) {
         if (board[i][y]) return true;
@@ -19,7 +21,7 @@ bool check_if_threathens_other_queen(int x, int y, bool board[8][8]) {
     for (int j = y + 1; j < 8; j++) {
         if (board[x][j]) return true;
     }
-    
+
     for (int i = x + 1, j = y + 1; i < 8 && j < 8; i++, j++) {
         if (board[i][j]) return true;
     }
@@ -43,7 +45,7 @@ int is_valid_eight_queens(std::string file_name) {
         while (file) {
             if (file.eof()) break;
 
-            if (row_count == 8) 
+            if (row_count == 8)
                 return -1;
 
             std::getline(file, line);
