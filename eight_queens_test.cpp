@@ -17,4 +17,5 @@ TEST_CASE("Eight Queens - Valid", "[eight_queens]") {
 
 TEST_CASE("Eight Queens - Invalid", "[eight_queens]") {
     REQUIRE(is_valid_eight_queens("invalid_board_eight_queens.txt") == -1);
+    REQUIRE(is_valid_eight_queens("valid_board_without_eight_queens.txt") == -1);
 }
