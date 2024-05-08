@@ -22,6 +22,8 @@ int is_valid_eight_queens(std::string file_name) {
             std::getline(file, line);
             if (line.length() != 8) return -1;
         }
+    } else {
+        return -1;
     }
 
     file.close();
