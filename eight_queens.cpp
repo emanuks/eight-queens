@@ -11,6 +11,16 @@
 #include <fstream>
 #include <string>
 
+bool check_if_threathens_other_queen(int x, int y, bool board[8][8]) {
+    for (int i = x; i < 8; i++) {
+        for (int j = y; j < 8; j++) {
+            if (board[i][j]) return true;
+        }
+    }
+
+    return false;
+}
+
 int is_valid_eight_queens(std::string file_name) {
     std::ifstream file;
     bool board[8][8] = {false};
@@ -19,7 +29,6 @@ int is_valid_eight_queens(std::string file_name) {
     file.open(file_name);
 
     if (file.is_open()) {
-
         std::string line;
         while (file) {
             if (file.eof()) break;
@@ -27,7 +36,6 @@ int is_valid_eight_queens(std::string file_name) {
             if (row_count == 8) 
                 return -1;
 
-            row_count++;
             std::getline(file, line);
 
             if (line.length() != 8) return -1;
@@ -48,5 +56,13 @@ int is_valid_eight_queens(std::string file_name) {
     if (row_count != 8 || queen_count != 8) return -1;
 
     file.close();
+
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+            if (board[i][j] && check_if_threathens_other_queen(i, j, board))
+                return 1;
+        }
+    }
+
     return 0;
 }
