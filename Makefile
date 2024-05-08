@@ -12,9 +12,9 @@ cpplint: eight_queens_test.cpp   eight_queens.cpp eight_queens.hpp
 	cpplint   --exclude=catch.hpp  *.*
 	
 gcov: eight_queens_test.cpp   eight_queens.cpp eight_queens.hpp
-	g++ -std=c++11 -Wall -Wall -fprofile-arcs -ftest-coverage -c romanos.cpp
-	g++ -std=c++11 -Wall -fprofile-arcs -ftest-coverage romanos.o testa_romanos.cpp -o testa_romanos
-	./testa_romanos
+	g++ -std=c++11 -Wall -Wall -fprofile-arcs -ftest-coverage -c eight_queens.cpp
+	g++ -std=c++11 -Wall -fprofile-arcs -ftest-coverage eight_queens.o eight_queens_test.cpp -o eight_queens_test
+	./eight_queens_test
 	gcov *.cpp	
 	
 debug: eight_queens_test.cpp   eight_queens.cpp eight_queens.hpp

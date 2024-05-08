@@ -1,0 +1,81 @@
+        -:    0:Source:eight_queens.cpp
+        -:    1:/*******************************************************
+        -:    2:* Copyright (C) 2024 emanuks <emanuels313@gmail.com>
+        -:    3:*
+        -:    4:* This file is part of eight-queens.
+        -:    5:*
+        -:    6:* eight-queens can not be copied and/or distributed without the express
+        -:    7:* permission of emanuks
+        -:    8:*******************************************************/
+        -:    9:
+        -:   10:#include <iostream>
+        -:   11:#include <fstream>
+        -:   12:#include <string>
+        -:   13:
+        -:   14:#include "./eight_queens.hpp"
+        -:   15:
+       17:   16:bool check_if_threathens_other_queen(int x, int y, bool board[8][8]) {
+       80:   17:    for (int i = x + 1; i < 8; i++) {
+       64:   18:        if (board[i][y]) return true;
+        -:   19:    }
+        -:   20:
+       68:   21:    for (int j = y + 1; j < 8; j++) {
+       53:   22:        if (board[x][j]) return true;
+        -:   23:    }
+        -:   24:
+       47:   25:    for (int i = x + 1, j = y + 1; i < 8 && j < 8; i++, j++) {
+      32*:   26:        if (board[i][j]) return true;
+        -:   27:    }
+        -:   28:
+       53:   29:    for (int i = x + 1, j = y - 1; i < 8 && j >= 0; i++, j--) {
+       39:   30:        if (board[i][j]) return true;
+        -:   31:    }
+        -:   32:
+       14:   33:    return false;
+        -:   34:}
+        -:   35:
+       10:   36:int is_valid_eight_queens(std::string file_name) {
+       10:   37:    std::ifstream file;
+       10:   38:    bool board[8][8] = {false};
+       10:   39:    int row_count = 0;
+       10:   40:    int queen_count = 0;
+       10:   41:    file.open(file_name);
+        -:   42:
+       10:   43:    if (file.is_open()) {
+        9:   44:        std::string line;
+       72:   45:        while (file) {
+       72:   46:            if (file.eof()) break;
+        -:   47:
+       65:   48:            if (row_count == 8)
+        1:   49:                return -1;
+        -:   50:
+       64:   51:            std::getline(file, line);
+        -:   52:
+       64:   53:            if (line.length() != 8) return -1;
+        -:   54:
+      567:   55:            for (int i = 0; i < 8; i++) {
+      504:   56:                if (line[i] == '1') {
+       61:   57:                    board[row_count][i] = true;
+       61:   58:                    queen_count++;
+        -:   59:                }
+        -:   60:            }
+        -:   61:
+       63:   62:            row_count++;
+        -:   63:        }
+        9:   64:    } else {
+        1:   65:        return -1;
+        -:   66:    }
+        -:   67:
+        7:   68:    if (row_count != 8 || queen_count != 8) return -1;
+        -:   69:
+        4:   70:    file.close();
+        -:   71:
+       18:   72:    for (int i = 0; i < 8; i++) {
+      131:   73:        for (int j = 0; j < 8; j++) {
+      117:   74:            if (board[i][j] && check_if_threathens_other_queen(i, j, board))
+        3:   75:                return 0;
+        -:   76:        }
+        -:   77:    }
+        -:   78:
+        1:   79:    return 1;
+       10:   80:}
