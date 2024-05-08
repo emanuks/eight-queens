@@ -20,5 +20,6 @@ TEST_CASE("Eight Queens - Invalid", "[eight_queens]") {
     REQUIRE(is_valid_eight_queens("inexisting_file.txt") == -1);
     REQUIRE(is_valid_eight_queens("valid_columns_invalid_rows_9.txt") == -1);
     REQUIRE(is_valid_eight_queens("valid_columns_invalid_rows_7.txt") == -1);
-    REQUIRE(is_valid_eight_queens("valid_board_without_eight_queens.txt") == -1);
+    REQUIRE(is_valid_eight_queens("valid_board_without_eight_queens_less.txt") == -1);
+    REQUIRE(is_valid_eight_queens("valid_board_without_eight_queens_more.txt") == -1);
 }

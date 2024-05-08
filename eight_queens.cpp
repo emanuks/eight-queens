@@ -15,6 +15,7 @@ int is_valid_eight_queens(std::string file_name) {
     std::ifstream file;
     bool board[8][8] = {false};
     int row_count = 0;
+    int queen_count = 0;
     file.open(file_name);
 
     if (file.is_open()) {
@@ -30,12 +31,21 @@ int is_valid_eight_queens(std::string file_name) {
             std::getline(file, line);
 
             if (line.length() != 8) return -1;
+
+            for (int i = 0; i < 8; i++) {
+                if (line[i] == '1') {
+                    board[row_count][i] = true;
+                    queen_count++;
+                }
+            }
+
+            row_count++;
         }
     } else {
         return -1;
     }
 
-    if (row_count != 8) return -1;
+    if (row_count != 8 || queen_count != 8) return -1;
 
     file.close();
     return 0;
